@@ -1,0 +1,29 @@
+# ---- Python ----
+.venv/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ---- Node / 本地工具链（可由构建脚本重新获取）----
+.tools/
+**/node_modules/
+npm-debug.log*
+
+# ---- 靶场构建产物（可由 build.ps1 重建）----
+demo-targets/electron-demo/App/
+demo-targets/wpf-codeonly/*.exe
+demo-targets/wpf-codeonly/obj/
+demo-targets/wpf-codeonly/bin/
+
+# ---- 工具箱运行时备份（每次操作重新生成）----
+**/.reskin-backups/
+
+# ---- 临时与系统文件 ----
+*.tmp
+*.log
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.user

@@ -1,0 +1,7 @@
+/* 把你的 QSS 写在这里。QSS 是 CSS2 子集。
+ * 提醒：图标发白/错位说明图标来自内嵌 qrc:/ 资源，仅改色不够，需在 QSS 里用
+ * image: url(...) 指向包内 assets/ 下的新图标（但 replace 只能落到磁盘路径，
+ * 内嵌资源本工具箱不改）。 */
+QWidget { background: #1e1e1e; color: #dddddd; }
+QPushButton { background: #2d2d30; color: #ffffff; }
+QPushButton:hover { background: #3d3d40; }

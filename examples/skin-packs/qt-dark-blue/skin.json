@@ -1,0 +1,29 @@
+{
+  "manifest_version": 1,
+  "name": "qt-dark-blue",
+  "framework": "qt",
+  "version": "1.0.0",
+  "author": "desktop-ui-reskinner demo",
+  "description": "Qt/PySide6 靶场的深蓝暗色换肤包：替换外部 QSS 并把 config.ini 的 theme 切到 dark",
+  "target_match": {
+    "signals_all": ["external-qss"],
+    "files_any": ["main.py", "skins/style.qss"]
+  },
+  "ops": [
+    {
+      "op": "replace_file",
+      "src": "assets/style.qss",
+      "dst": "skins/style.qss",
+      "backup": true
+    },
+    {
+      "op": "patch_text",
+      "file": "config.ini",
+      "find": "theme=light",
+      "replace": "theme=dark",
+      "must_match": 1,
+      "encoding": "utf-8",
+      "backup": true
+    }
+  ]
+}

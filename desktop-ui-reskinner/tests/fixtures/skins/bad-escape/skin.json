@@ -1,0 +1,1 @@
+﻿{"manifest_version":1,"name":"bad-escape","framework":"qt","version":"1.0.0","target_match":{"signals_all":["qt6core-dll"],"files_any":["FakeQtApp.exe"]},"ops":[{"op":"replace_file","src":"assets/style.qss","dst":"../evil.qss","backup":true}]}

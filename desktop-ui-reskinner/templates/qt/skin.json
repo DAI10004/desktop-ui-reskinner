@@ -1,0 +1,29 @@
+{
+  "manifest_version": 1,
+  "name": "qt-dark-skeleton",
+  "framework": "qt",
+  "version": "1.0.0",
+  "author": "",
+  "description": "Qt 暗色 QSS 换肤骨架：替换外部 style.qss + 切配置开关",
+  "target_match": {
+    "signals_all": ["qt6core-dll"],
+    "files_any": ["DemoApp.exe"]
+  },
+  "ops": [
+    {
+      "op": "replace_file",
+      "src": "assets/style.qss",
+      "dst": "skins/style.qss",
+      "backup": true
+    },
+    {
+      "op": "patch_text",
+      "file": "config.ini",
+      "find": "theme=light",
+      "replace": "theme=dark",
+      "must_match": 1,
+      "encoding": "utf-8",
+      "backup": true
+    }
+  ]
+}

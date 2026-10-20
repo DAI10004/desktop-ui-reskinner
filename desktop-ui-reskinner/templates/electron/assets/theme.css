@@ -1,0 +1,7 @@
+/* 替换 asar 内 dist/styles/theme.css 的内容。
+ * 注意：
+ * 1. 先跑 detect，确认没有 asarIntegrity/fuses 信号，否则 apply 会拒写。
+ * 2. member 路径以 asar 内 list 结果为准（可用 node scripts/asar_pack.js list <asar> 查）。
+ * 3. 升级后 app.asar 会被 autoUpdater 覆盖，重新 apply 本皮肤即可。
+ */
+body { background: #111111; color: #eeeeee; }

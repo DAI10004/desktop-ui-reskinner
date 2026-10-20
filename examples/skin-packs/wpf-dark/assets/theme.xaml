@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- 深蓝暗色外挂 ResourceDictionary -->
+  <SolidColorBrush x:Key="AppBg" Color="#0E1626"/>
+  <SolidColorBrush x:Key="AppFg" Color="#D7E6FF"/>
+  <SolidColorBrush x:Key="Accent" Color="#2F5FB3"/>
+</ResourceDictionary>

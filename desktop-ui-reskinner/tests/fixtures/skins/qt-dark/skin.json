@@ -1,0 +1,33 @@
+{
+  "manifest_version": 1,
+  "name": "qt-dark-synth",
+  "framework": "qt",
+  "version": "1.0.0",
+  "author": "test",
+  "description": "合成 Qt 深色皮肤(自测)",
+  "target_match": {
+    "signals_all": [
+      "qt6core-dll"
+    ],
+    "files_any": [
+      "FakeQtApp.exe"
+    ]
+  },
+  "ops": [
+    {
+      "op": "replace_file",
+      "src": "assets/style.qss",
+      "dst": "skins/style.qss",
+      "backup": true
+    },
+    {
+      "op": "patch_text",
+      "file": "config.ini",
+      "find": "theme=light",
+      "replace": "theme=dark",
+      "must_match": 1,
+      "encoding": "utf-8",
+      "backup": true
+    }
+  ]
+}

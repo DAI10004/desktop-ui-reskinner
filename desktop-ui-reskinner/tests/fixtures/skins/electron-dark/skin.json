@@ -1,0 +1,25 @@
+{
+  "manifest_version": 1,
+  "name": "electron-dark-synth",
+  "framework": "electron",
+  "version": "1.0.0",
+  "author": "test",
+  "description": "合成 Electron asar 换肤(自测)",
+  "target_match": {
+    "signals_all": [
+      "app-asar"
+    ],
+    "files_any": [
+      "FakeElectron.exe"
+    ]
+  },
+  "ops": [
+    {
+      "op": "asar_replace",
+      "archive": "resources/app.asar",
+      "member": "dist/styles/theme.css",
+      "src": "assets/theme.css",
+      "backup": true
+    }
+  ]
+}

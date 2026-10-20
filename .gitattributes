@@ -1,0 +1,21 @@
+# 默认文本文件在仓库中统一为 LF
+* text=auto eol=lf
+
+# Windows 专用脚本保持 CRLF
+*.ps1 text e=crlf
+*.cmd text e=crlf
+*.bat text e=crlf
+
+# 二进制资源不做换行/编码转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.exe binary
+*.dll binary
+*.asar binary
+*.pak binary
+*.bin binary
+*.rcc binary
+*.qrc linguist-generated=false

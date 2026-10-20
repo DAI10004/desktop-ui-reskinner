@@ -1,0 +1,21 @@
+{
+  "manifest_version": 1,
+  "name": "electron-dark",
+  "framework": "electron",
+  "version": "1.0.0",
+  "author": "desktop-ui-reskinner demo",
+  "description": "Electron 靶场的暗色换肤包：asar_replace 替换 app.asar 内 dist/styles/theme.css",
+  "target_match": {
+    "signals_all": ["app-asar"],
+    "files_any": ["electron.exe", "resources/app.asar"]
+  },
+  "ops": [
+    {
+      "op": "asar_replace",
+      "archive": "resources/app.asar",
+      "member": "dist/styles/theme.css",
+      "src": "assets/theme.css",
+      "backup": true
+    }
+  ]
+}

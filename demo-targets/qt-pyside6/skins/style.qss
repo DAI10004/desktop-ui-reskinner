@@ -1,0 +1,43 @@
+/* Reskinner Qt Demo —— 浅色默认主题（light） */
+QMainWindow {
+    background: #f2f2f0;
+}
+QMenuBar {
+    background: #e8e8e6;
+    color: #222222;
+}
+QToolBar {
+    background: #ddddda;
+    color: #222222;
+}
+QListWidget {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #c8c8c4;
+}
+QListWidget::item {
+    padding: 4px;
+}
+QListWidget::item:selected {
+    background: #b9d4f0;
+    color: #0b3d66;
+}
+QTextEdit {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #c8c8c4;
+}
+QPushButton {
+    background: #ffffff;
+    color: #1a1a1a;
+    border: 1px solid #9a9a94;
+    border-radius: 4px;
+    padding: 6px 16px;
+}
+QPushButton:hover {
+    background: #dcebfb;
+}
+QStatusBar {
+    background: #e8e8e6;
+    color: #333333;
+}

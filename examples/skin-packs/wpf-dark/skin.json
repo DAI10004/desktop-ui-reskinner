@@ -1,0 +1,19 @@
+{
+  "manifest_version": 1,
+  "name": "wpf-dark",
+  "framework": "wpf",
+  "version": "1.0.0",
+  "author": "desktop-ui-reskinner demo",
+  "description": "WPF code-only 靶场的暗色换肤包：替换同目录外挂 theme.xaml（松散 ResourceDictionary 路径）",
+  "target_match": {
+    "files_any": ["WpfDemo.exe", "theme.xaml"]
+  },
+  "ops": [
+    {
+      "op": "replace_file",
+      "src": "assets/theme.xaml",
+      "dst": "theme.xaml",
+      "backup": true
+    }
+  ]
+}

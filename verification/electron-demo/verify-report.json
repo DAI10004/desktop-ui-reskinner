@@ -1,0 +1,34 @@
+{
+  "target": "electron-demo",
+  "skin": "electron-dark",
+  "environment": {
+    "electron": "electron@44.9.1 (dist copied from .tools/electron-deps via npmmirror)",
+    "asar_tool": "@electron/asar@4.3.1",
+    "build": "demo-targets/electron-demo/build.ps1 (idempotent)",
+    "runtime": "App/electron.exe launches; window title 'Reskinner Electron Demo' 800x600 confirmed via PrintWindow frame capture"
+  },
+  "commands": [
+    {"step": "build", "cmd": "powershell -File demo-targets/electron-demo/build.ps1", "exit": 0, "note": "App/electron.exe + resources/app.asar (members: dist/styles/theme.css, index.html, main.js, package.json)"},
+    {"step": "detect", "cmd": "reskin.py --json detect --target App", "exit": 0, "framework": "electron", "confidence": "high", "signals": ["app-asar(0.95)","ffmpeg.dll","v8_context_snapshot.bin","vk_swiftshader.dll","chrome-pak"]},
+    {"step": "before capture", "cmd": "verification/shoot_win.py App/electron.exe before.png 'Reskinner Electron Demo'", "exit": 0, "note": "PrintWindow: 窗口框架(标题栏+原生菜单 File/Edit/View/Window) 成功捕获 801x601；Chromium GPU 合成的客户区为空白(已知限制)"},
+    {"step": "plan dry", "cmd": "cd App; reskin.py --json plan --target . --skin <electron-dark>", "exit": 2, "note": "dry-run, risk tags: asar 重打包 / 若启用 asarIntegrity 会被运行时拒绝；未写入"},
+    {"step": "apply dry no confirm", "cmd": "reskin.py --json apply --target . --skin <electron-dark>", "exit": 2, "blockers": [], "note": "未写入"},
+    {"step": "apply --confirm", "cmd": "cd App; reskin.py --json apply --target . --skin <abs electron-dark> --confirm", "exit": 0, "backup_dir": ".reskin-backups/20261020-163304-electron-dark", "results": ["asar_replace resources/app.asar member dist/styles/theme.css"]},
+    {"step": "archive-level after assertion", "cmd": "asar.extractFile(app.asar,'dist\\styles\\theme.css')", "exit": 0, "member_bytes_after": 570, "member_head_after": "/* electron-dark 换肤包 —— 深蓝暗色主题 */ body { background: #0e1626; color: #d7e6ff;"},
+    {"step": "runtime after capture attempt", "cmd": "shoot_win.py / shoot_screen.py after.png", "exit": 0, "note": "PrintWindow 客户区仍为空白(Chromium compositor)；屏幕 BitBlt 因前台抢占截到其它窗口，运行时像素断言在本环境不可得——按任务约定降级为归档级验证"},
+    {"step": "rollback", "cmd": "cd App; reskin.py --json rollback --target .", "exit": 0, "restored": ["resources/app.asar"], "mismatches": []},
+    {"step": "archive-level restored assertion", "cmd": "asar.extractFile(app.asar,'dist\\styles\\theme.css')", "exit": 0, "member_bytes_restored": 581, "member_head_restored": "/* Reskinner Electron Demo —— 浅色主题（light） */ body { background: #f5f5f0;", "asar_mtime_restored": "2026-10-20 16:27:45 (原始构建时间)", "members": ["dist","dist/styles","dist/styles/theme.css","index.html","main.js","package.json"]}
+  ],
+  "assertions": {
+    "apply_replaced_member_to_dark_css": true,
+    "member_set_unchanged_after_apply": true,
+    "rollback_byte_restore_original": true,
+    "runtime_pixel_verification_obtained": false,
+    "runtime_pixel_verification_reason": "PrintWindow 无法捕获 Chromium GPU 合成客户区( before/after 均为空白客户区，仅窗口框架)；屏幕截屏在共享桌面环境受前台抢占影响不可靠。"
+  },
+  "bugs_notes": [
+    "asar 成员键在本版本(@electron/asar 4.3.1, Windows)以反斜杠存储(dist\\styles\\theme.css)：全新 pack 的包同样如此，属 asar 工具自身行为，非 reskin.py 重打包引入；Electron 运行时可正常加载。",
+    "reskin.py asar_replace 流程正常：plan/dry-run exit2 无写入、apply --confirm 替换成员、rollback 逐字节还原(mismatches=[])。"
+  ],
+  "verdict": "DEGRADED-SUCCESS (运行时窗口可启动但客户区截图不可得；归档级 plan→apply→rollback 全流程验证通过)"
+}

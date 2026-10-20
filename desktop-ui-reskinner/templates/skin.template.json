@@ -1,0 +1,45 @@
+{
+  "manifest_version": 1,
+  "name": "demo-dark-blue",
+  "framework": "qt",
+  "version": "1.0.0",
+  "author": "",
+  "description": "深蓝暗色主题，替换 qss 与两处图标",
+  "target_match": {
+    "signals_all": ["qt6core-dll"],
+    "files_any": ["DemoApp.exe", "main.py"]
+  },
+  "ops": [
+    {
+      "op": "replace_file",
+      "src": "assets/style.qss",
+      "dst": "skins/style.qss",
+      "backup": true
+    },
+    {
+      "op": "patch_text",
+      "file": "config.ini",
+      "find": "theme=light",
+      "replace": "theme=dark",
+      "must_match": 1,
+      "encoding": "utf-8",
+      "backup": true
+    },
+    {
+      "op": "asar_replace",
+      "archive": "resources/app.asar",
+      "member": "dist/styles/theme.css",
+      "src": "assets/theme.css",
+      "backup": true
+    },
+    {
+      "op": "pe_resource",
+      "image": "DemoApp.exe",
+      "restype": "RCDATA",
+      "resname": "QSS",
+      "lang": 0,
+      "src": "assets/style.qss",
+      "backup": true
+    }
+  ]
+}

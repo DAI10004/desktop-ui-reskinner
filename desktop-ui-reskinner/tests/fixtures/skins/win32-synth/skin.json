@@ -1,0 +1,1 @@
+﻿{"manifest_version":1,"name":"win32-synth","framework":"win32","version":"1.0.0","target_match":{"signals_all":[],"files_any":["FakeQtApp.exe"]},"ops":[{"op":"pe_resource","image":"FakeQtApp.exe","restype":"RCDATA","resname":"QSS","lang":0,"src":"assets/style.qss","backup":true}]}

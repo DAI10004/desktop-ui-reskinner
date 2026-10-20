@@ -1,0 +1,2 @@
+/* 被写入 exe 资源段 RCDATA/QSS 的内容。仅自有/靶场 exe 测试。 */
+QWidget { background: #222; color: #eee; }

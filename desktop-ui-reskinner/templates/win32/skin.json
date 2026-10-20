@@ -1,0 +1,23 @@
+{
+  "manifest_version": 1,
+  "name": "win32-res-skeleton",
+  "framework": "win32",
+  "version": "1.0.0",
+  "author": "",
+  "description": "PE 资源段换肤骨架（图标/RCDATA QSS）。需要 ResourceHacker.exe。",
+  "target_match": {
+    "signals_all": [],
+    "files_any": ["DemoApp.exe"]
+  },
+  "ops": [
+    {
+      "op": "pe_resource",
+      "image": "DemoApp.exe",
+      "restype": "RCDATA",
+      "resname": "QSS",
+      "lang": 0,
+      "src": "assets/style.qss",
+      "backup": true
+    }
+  ]
+}

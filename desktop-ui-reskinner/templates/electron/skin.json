@@ -1,0 +1,21 @@
+{
+  "manifest_version": 1,
+  "name": "electron-dark-skeleton",
+  "framework": "electron",
+  "version": "1.0.0",
+  "author": "",
+  "description": "Electron asar 内 renderer CSS 换肤骨架",
+  "target_match": {
+    "signals_all": ["app-asar"],
+    "files_any": ["DemoApp.exe"]
+  },
+  "ops": [
+    {
+      "op": "asar_replace",
+      "archive": "resources/app.asar",
+      "member": "dist/styles/theme.css",
+      "src": "assets/theme.css",
+      "backup": true
+    }
+  ]
+}

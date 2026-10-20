@@ -1,0 +1,78 @@
+{
+  "target": "qt-pyside6",
+  "skin": "qt-dark-blue",
+  "environment": {
+    "platform": "win11",
+    "python": "3.13 venv",
+    "qt": "PySide6 6.12.0",
+    "render": "QT_QPA_PLATFORM=offscreen"
+  },
+  "commands": [
+    {
+      "step": "before shot",
+      "cmd": ".venv\\Scripts\\python.exe verification\\qt-pyside6\\shoot.py verification\\qt-pyside6\\before.png demo-targets\\qt-pyside6",
+      "exit": 0
+    },
+    {
+      "step": "plan dry-run",
+      "cmd": "reskin.py --json plan --target <qt> --skin <qt-dark-blue>",
+      "exit": 2,
+      "note": "dry-run 不写入，符合约定"
+    },
+    {
+      "step": "apply dry-run (no --confirm)",
+      "cmd": "reskin.py --json apply --target <qt> --skin <qt-dark-blue>",
+      "exit": 2,
+      "note": "无写入"
+    },
+    {
+      "step": "apply --confirm --force (CWD=target root)",
+      "cmd": "cd demo-targets\\qt-pyside6; reskin.py --json apply --target . --skin <abs qt-dark-blue> --confirm --force",
+      "exit": 0
+    },
+    {
+      "step": "after shot",
+      "cmd": "shoot.py after.png",
+      "exit": 0
+    },
+    {
+      "step": "rollback",
+      "cmd": "cd demo-targets\\qt-pyside6; reskin.py --json rollback --target .",
+      "exit": 0
+    },
+    {
+      "step": "restored shot",
+      "cmd": "shoot.py restored.png",
+      "exit": 0
+    }
+  ],
+  "pixel_assertions": {
+    "before": {
+      "mean_r": 246.05,
+      "mean_g": 246.41,
+      "mean_b": 246.02,
+      "brightness": 246.26
+    },
+    "after": {
+      "mean_r": 22.4,
+      "mean_g": 36.12,
+      "mean_b": 62.18,
+      "brightness": 34.99
+    },
+    "restored": {
+      "mean_r": 246.05,
+      "mean_g": 246.41,
+      "mean_b": 246.02,
+      "brightness": 246.26
+    },
+    "brightness_after_lt_0.7_before": true,
+    "blue_dominant_after": true,
+    "before_vs_restored_diff_pixels": 0,
+    "restored_equals_before": true
+  },
+  "bugs_workarounds": [
+    "reskin.py 把 manifest 中相对 dst (skins/style.qss/config.ini) 按进程 CWD 解析 containment，CWD 不在 target 根时误判越界(blocked, exit 2)；workaround：执行 apply/rollback 时把 CWD 切到 target 根。",
+    "detect 对源码形态靶场只给出 confidence=low（无 Qt6Core.dll 信号），apply 需 --force。"
+  ],
+  "verdict": "SUCCESS"
+}

@@ -1,0 +1,28 @@
+/* Reskinner Electron Demo —— 浅色主题（light） */
+body {
+  background: #f5f5f0;
+  color: #1a1a1a;
+  font-family: "Segoe UI", sans-serif;
+  padding: 16px;
+}
+h1 { color: #0b3d66; }
+ul { background: #ffffff; border: 1px solid #c8c8c4; padding: 8px 24px; }
+textarea {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #c8c8c4;
+}
+button {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #9a9a94;
+  border-radius: 4px;
+  padding: 6px 16px;
+}
+button:hover { background: #dcebfb; }
+footer {
+  margin-top: 16px;
+  padding: 6px;
+  background: #e8e8e6;
+  color: #333333;
+}

@@ -1,0 +1,47 @@
+/* qt-dark-blue 换肤包 —— 深蓝暗色主题 */
+QMainWindow {
+    background: #0e1626;
+}
+QMenuBar {
+    background: #13203a;
+    color: #cfe0ff;
+}
+QMenuBar::item:selected {
+    background: #1f3a66;
+}
+QToolBar {
+    background: #13203a;
+    color: #cfe0ff;
+    border-bottom: 1px solid #24406e;
+}
+QListWidget {
+    background: #16233d;
+    color: #d7e6ff;
+    border: 1px solid #24406e;
+}
+QListWidget::item {
+    padding: 4px;
+}
+QListWidget::item:selected {
+    background: #2f5fb3;
+    color: #ffffff;
+}
+QTextEdit {
+    background: #16233d;
+    color: #d7e6ff;
+    border: 1px solid #24406e;
+}
+QPushButton {
+    background: #1f3a66;
+    color: #eaf2ff;
+    border: 1px solid #3a67b3;
+    border-radius: 4px;
+    padding: 6px 16px;
+}
+QPushButton:hover {
+    background: #2f5fb3;
+}
+QStatusBar {
+    background: #0a1220;
+    color: #9db8e6;
+}

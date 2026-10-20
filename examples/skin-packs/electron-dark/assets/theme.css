@@ -1,0 +1,28 @@
+/* electron-dark 换肤包 —— 深蓝暗色主题 */
+body {
+  background: #0e1626;
+  color: #d7e6ff;
+  font-family: "Segoe UI", sans-serif;
+  padding: 16px;
+}
+h1 { color: #8fb8ff; }
+ul { background: #16233d; border: 1px solid #24406e; padding: 8px 24px; }
+textarea {
+  background: #16233d;
+  color: #d7e6ff;
+  border: 1px solid #24406e;
+}
+button {
+  background: #1f3a66;
+  color: #eaf2ff;
+  border: 1px solid #3a67b3;
+  border-radius: 4px;
+  padding: 6px 16px;
+}
+button:hover { background: #2f5fb3; }
+footer {
+  margin-top: 16px;
+  padding: 6px;
+  background: #0a1220;
+  color: #9db8e6;
+}
