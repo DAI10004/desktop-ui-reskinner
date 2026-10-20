@@ -1,6 +1,7 @@
 # 03 · 发布到 GitHub 指南
 
-本仓库目前已完成**本地 git 初始化**（分支 `main`），但**尚未配置任何远端**——创建 GitHub 仓库、提供账号凭据与推送动作由你本人完成。以下步骤在 Windows PowerShell / Git Bash 均可执行。
+> **已于 2026-10-20 发布**：<https://github.com/DAI10004/desktop-ui-reskinner>（Public，分支 `main`，本地已设置上游追踪 `origin/main`）。
+> 下文保留为可复现的发布手册；在新机器上克隆使用 `git clone https://github.com/DAI10004/desktop-ui-reskinner.git`。
 
 ## 1. 发布前检查
 
@@ -51,8 +52,7 @@ git branch -M main
 ## 5. 关联远端并推送
 
 ```powershell
-# 把 <你的用户名> 换成实际 GitHub 用户名
-git remote add origin https://github.com/<你的用户名>/desktop-ui-reskinner.git
+git remote add origin https://github.com/DAI10004/desktop-ui-reskinner.git
 git push -u origin main
 ```
 
