@@ -14,6 +14,14 @@ QToolBar {
     color: #cfe0ff;
     border-bottom: 1px solid #24406e;
 }
+QToolBar QToolButton {
+    color: #cfe0ff;
+    background: transparent;
+    padding: 2px 8px;
+}
+QToolBar QToolButton:hover {
+    background: #1f3a66;
+}
 QListWidget {
     background: #16233d;
     color: #d7e6ff;

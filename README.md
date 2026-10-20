@@ -24,8 +24,8 @@ detect（只读识别框架） → plan（干跑列出改动与风险） → 用
 
 <table>
 <tr>
-<td align="center"><img width="320" src="verification/qt-pyside6/before.png" alt="qt before"><br>before · 亮度均值 246.26</td>
-<td align="center"><img width="320" src="verification/qt-pyside6/after.png" alt="qt after"><br>after · 亮度 34.99（R22/G36/B62，蓝占优）</td>
+<td align="center"><img width="320" src="verification/qt-pyside6/before.png" alt="qt before"><br>before · 亮度均值 246.38</td>
+<td align="center"><img width="320" src="verification/qt-pyside6/after.png" alt="qt after"><br>after · 亮度 34.86（R22/G36/B62，蓝占优）</td>
 <td align="center"><img width="320" src="verification/qt-pyside6/restored.png" alt="qt restored"><br>rollback · 与 before <b>0 像素差异</b></td>
 </tr>
 </table>

@@ -5,74 +5,29 @@
     "platform": "win11",
     "python": "3.13 venv",
     "qt": "PySide6 6.12.0",
-    "render": "QT_QPA_PLATFORM=offscreen"
+    "render": "QT_QPA_PLATFORM=offscreen",
+    "font_bootstrap": "offscreen 平台不发现系统字体，main.py/bootstrap_fonts 显式注册 Segoe UI（缺失时回退 Microsoft YaHei），保证截图文字可读"
   },
   "commands": [
-    {
-      "step": "before shot",
-      "cmd": ".venv\\Scripts\\python.exe verification\\qt-pyside6\\shoot.py verification\\qt-pyside6\\before.png demo-targets\\qt-pyside6",
-      "exit": 0
-    },
-    {
-      "step": "plan dry-run",
-      "cmd": "reskin.py --json plan --target <qt> --skin <qt-dark-blue>",
-      "exit": 2,
-      "note": "dry-run 不写入，符合约定"
-    },
-    {
-      "step": "apply dry-run (no --confirm)",
-      "cmd": "reskin.py --json apply --target <qt> --skin <qt-dark-blue>",
-      "exit": 2,
-      "note": "无写入"
-    },
-    {
-      "step": "apply --confirm --force (CWD=target root)",
-      "cmd": "cd demo-targets\\qt-pyside6; reskin.py --json apply --target . --skin <abs qt-dark-blue> --confirm --force",
-      "exit": 0
-    },
-    {
-      "step": "after shot",
-      "cmd": "shoot.py after.png",
-      "exit": 0
-    },
-    {
-      "step": "rollback",
-      "cmd": "cd demo-targets\\qt-pyside6; reskin.py --json rollback --target .",
-      "exit": 0
-    },
-    {
-      "step": "restored shot",
-      "cmd": "shoot.py restored.png",
-      "exit": 0
-    }
+    {"step": "before shot", "cmd": ".venv\\Scripts\\python.exe verification\\qt-pyside6\\shoot.py before.png demo-targets\\qt-pyside6", "exit": 0},
+    {"step": "apply --confirm (CWD=项目根, 相对路径按 --target 解析)", "cmd": "reskin.py --json apply --target demo-targets\\qt-pyside6 --skin examples\\skin-packs\\qt-dark-blue --confirm", "exit": 0, "note": "缺陷修复后无需 cd 到 target、无需 --force（detect=qt/medium）"},
+    {"step": "after shot", "cmd": "shoot.py after.png", "exit": 0},
+    {"step": "rollback", "cmd": "reskin.py --json rollback --target demo-targets\\qt-pyside6", "exit": 0, "mismatches": []},
+    {"step": "restored shot", "cmd": "shoot.py restored.png", "exit": 0}
   ],
   "pixel_assertions": {
-    "before": {
-      "mean_r": 246.05,
-      "mean_g": 246.41,
-      "mean_b": 246.02,
-      "brightness": 246.26
-    },
-    "after": {
-      "mean_r": 22.4,
-      "mean_g": 36.12,
-      "mean_b": 62.18,
-      "brightness": 34.99
-    },
-    "restored": {
-      "mean_r": 246.05,
-      "mean_g": 246.41,
-      "mean_b": 246.02,
-      "brightness": 246.26
-    },
+    "before": {"mean_r": 246.10, "mean_g": 246.56, "mean_b": 246.18, "brightness": 246.38},
+    "after": {"mean_r": 22.08, "mean_g": 36.04, "mean_b": 62.32, "brightness": 34.86},
+    "restored": {"mean_r": 246.10, "mean_g": 246.56, "mean_b": 246.18, "brightness": 246.38},
     "brightness_after_lt_0.7_before": true,
     "blue_dominant_after": true,
     "before_vs_restored_diff_pixels": 0,
     "restored_equals_before": true
   },
-  "bugs_workarounds": [
-    "reskin.py 把 manifest 中相对 dst (skins/style.qss/config.ini) 按进程 CWD 解析 containment，CWD 不在 target 根时误判越界(blocked, exit 2)；workaround：执行 apply/rollback 时把 CWD 切到 target 根。",
-    "detect 对源码形态靶场只给出 confidence=low（无 Qt6Core.dll 信号），apply 需 --force。"
+  "regression_notes": [
+    "早期版本相对 dst 按 CWD 解析 containment 的阻断缺陷已修复并回归（见 desktop-ui-reskinner/tests），本次 apply 从项目根 CWD 直接成功。",
+    "源码形态 Qt 置信度已从 low 提升为 medium（py-qt-import 信号 0.6），apply 不再需要 --force。",
+    "截图曾因 offscreen 平台缺系统字体而文字全为方框；已在靶场 main.py 与 shoot.py 加入 Windows 字体显式注册（桌面真实运行时自动发现字体，此注册仅兜底）。"
   ],
   "verdict": "SUCCESS"
 }

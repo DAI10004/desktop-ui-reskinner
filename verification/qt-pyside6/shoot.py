@@ -24,6 +24,7 @@ def main():
 
     theme, qss = mod.load_theme()
     app = QApplication.instance() or QApplication(sys.argv)
+    mod.bootstrap_fonts(app)
     app.setStyleSheet(qss)
     win = mod.MainWindow(theme)
     win.resize(640, 420)

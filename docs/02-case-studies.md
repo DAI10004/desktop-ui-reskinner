@@ -30,13 +30,13 @@
 | `verify` | 0 | 变更点与计划一致 |
 | `rollback` | 0 | `mismatches=[]` |
 
-**像素断言**（`QWidget.grab()` 全图均值，[原始报告](../verification/qt-pyside6/verify-report.json)）：
+**像素断言**（`QWidget.grab()` 全图均值；离屏平台不发现系统字体，截图脚本与靶场 `bootstrap_fonts()` 显式注册 Segoe UI，[原始报告](../verification/qt-pyside6/verify-report.json)）：
 
 | 状态 | R | G | B | 亮度 |
 |---|---|---|---|---|
-| before | 246.05 | 246.41 | 246.02 | 246.26（近白浅灰） |
-| after | 22.40 | 36.12 | 62.18 | 34.99（深蓝，蓝通道占优） |
-| restored | 246.05 | 246.41 | 246.02 | 246.26 |
+| before | 246.10 | 246.56 | 246.18 | 246.38（近白浅灰） |
+| after | 22.08 | 36.04 | 62.32 | 34.86（深蓝，蓝通道占优） |
+| restored | 246.10 | 246.56 | 246.18 | 246.38 |
 
 - `after 亮度 < 0.7 × before`：成立；`after 蓝色占优`：成立；
 - `before` 与 `restored` 差异像素数：**0**。

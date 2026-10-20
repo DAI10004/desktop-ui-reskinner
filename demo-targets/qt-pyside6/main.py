@@ -92,9 +92,34 @@ class MainWindow(QMainWindow):
         self.status.showMessage(f"clicked; theme = {self._theme_name}")
 
 
+def bootstrap_fonts(app):
+    """离屏（offscreen）平台插件不做系统字体发现，需显式注册字体，否则文字渲染为方框。
+
+    真实桌面运行时由 windows 平台插件自动发现系统字体，本函数仅作兜底，
+    对正常运行无副作用。
+    """
+    if sys.platform != "win32":
+        return
+    from PySide6.QtGui import QFontDatabase, QFont
+
+    candidates = [
+        (r"C:\Windows\Fonts\segoeui.ttf", "Segoe UI"),
+        (r"C:\Windows\Fonts\msyh.ttc", "Microsoft YaHei"),
+    ]
+    family = None
+    for path, name in candidates:
+        if os.path.exists(path):
+            font_id = QFontDatabase.addApplicationFont(path)
+            if font_id >= 0 and name in QFontDatabase.applicationFontFamilies(font_id):
+                family = family or name
+    if family:
+        app.setFont(QFont(family, 9))
+
+
 def main():
     theme, qss = load_theme()
     app = QApplication(sys.argv)
+    bootstrap_fonts(app)
     app.setStyleSheet(qss)
     win = MainWindow(theme)
     win.show()
